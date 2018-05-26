@@ -1,0 +1,103 @@
+#canvas {
+	display: none;
+}
+
+#video {
+	max-width: 100%;
+    filter: ();
+}
+#uploaded-picture {
+    max-width: 100%;
+    display: none;
+}
+
+#preview-wrapper {
+	position: relative;
+    line-height: 0;
+}
+
+#filters-wrapper {
+    overflow: hidden;
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#filters-wrapper > .filter-div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    transform: rotate(0);
+}
+
+#filters-wrapper > .filter-div[data-mode="move"],
+#filters-wrapper > .filter-div[data-mode="move"] > img {
+    cursor: move;
+}
+#filters-wrapper > .filter-div[data-mode="resize"],
+#filters-wrapper > .filter-div[data-mode="resize"] > img {
+    cursor: ew-resize;
+}
+#filters-wrapper > .filter-div[data-mode="rotate"],
+#filters-wrapper > .filter-div[data-mode="rotate"] > img {
+    cursor: ns-resize;
+}
+
+
+#pictures-taken-wrapper {
+    overflow: scroll;
+    overflow-x: hidden;
+    max-height: 50vh;
+}
+
+.picture-taken {
+    position: relative;
+}
+
+.picture-taken > .share-picture,
+.picture-taken > .delete-picture {
+    line-height: 0;
+    position: absolute;
+    top: 12px;
+    background: white;
+    padding: 2px;
+    border-radius: 3px;
+}
+.picture-taken > .share-picture { left: 6px; }
+.picture-taken > .delete-picture { right: 6px; }
+
+.picture-taken > .share-picture > img,
+.picture-taken > .delete-picture > img {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+#share-picture-modal .modal-body img {
+    width: 100%;
+}
+#share-picture-modal .modal-body textarea {
+    width: 100%;
+}
+
+#frame-filters,
+#object-filters,
+#classic-filters {
+    width: 100%;
+    height: 35px;
+    cursor: pointer;
+}
+
+
+#startbutton {
+    display: block;
+    margin: auto;
+}
+#startbutton > img {
+    width: 20px;
+    height: 32px;
+}

@@ -1,0 +1,16 @@
+#profile {
+	margin-bottom: 1rem;
+}
+
+#update-user {
+	cursor: pointer;
+}
+
+label[for="mail-preference"] {
+	display: inline-block;
+}
+#mail-preference {
+	display: inline-block;
+    width: auto;
+    float: right;
+}

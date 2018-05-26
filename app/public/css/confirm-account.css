@@ -1,0 +1,15 @@
+.error-message {
+	text-align: center;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.success-message {
+	text-align: center;
+    background-color: #2ecc71;
+    color: white;
+    border-radius: 6px;
+    padding: 4px;
+}
