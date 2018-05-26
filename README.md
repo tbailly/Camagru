@@ -1,6 +1,6 @@
 # Camagru
 Website to take, edit and share pictures in PHP and JS Vanilla.
-You can test it live here : [Test my Camagru](https://thomasbs.fr)
+You can test it live here : [Test my Camagru](https://thomasbs.fr/camagru)
 
 ## Screenshots
 ![Feed page](https://github.com/tbailly/Camagru/blob/master/screenshots/feed.png)
