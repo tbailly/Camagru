@@ -10,7 +10,7 @@ function getPictures(skip, limit) {
 		"skip": skip,
 		"limit": limit
 	};
-	ajaxRequest(config.MODELS_D + "/my-pictures-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/my-pictures-controller.php", "POST", datas, function(){
 		requestCallback(successGetPictureCallback, null);
 	});
 
@@ -27,7 +27,7 @@ function getPictures(skip, limit) {
 			
 			let contentImg = document.createElement("img");
 			contentImg.classList.add("card-img-top");
-			contentImg.src = "../pictures/" + images[i].id_user + "/" + images[i].path + ".jpg";
+			contentImg.src = config.PICTURES_D + "/" + images[i].id_user + "/" + images[i].path + ".jpg";
 
 			let row = document.createElement("div");
 			row.classList.add("row", "justify-content-center", "align-items-center");
@@ -95,7 +95,7 @@ function deletePicture(imgDatas, imgSrc, imgWrapper) {
 		"callType": "deletePicture",
 		"idImage": imgDatas.id_image
 	};
-	ajaxRequest(config.MODELS_D + "/my-pictures-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/my-pictures-controller.php", "POST", datas, function(){
 		requestCallback(successDeletePictureCallback, null);
 	});
 
@@ -118,7 +118,7 @@ function setAsProfilePicture(imgSelector) {
 		"callType": "setAsProfilePicture",
 		"b64datas": mainImage.split("data:image/jpeg;base64,")[1]
 	};
-	ajaxRequest(config.MODELS_D + "/my-pictures-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/my-pictures-controller.php", "POST", datas, function(){
 		requestCallback(successSetAsProfilePictureCallback, null);
 	});
 

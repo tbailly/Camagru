@@ -62,7 +62,8 @@ function takePicture(width, height) {
 		"callType": "pictureMontage",
 		"jsonDatas": JSON.stringify(jsonDatas)
 	};
-	ajaxRequest(config.MODELS_D + "/take-picture-model.php", "POST", datas, function(){
+	console.log(datas);
+	ajaxRequest(config.CONTROLLERS_D + "/take-picture-controller.php", "POST", datas, function(){
 		requestCallback(successTakePictureCallback, null);
 	});
 
@@ -189,7 +190,7 @@ function sharePicture(pictureSelector) {
 			"pictureDatas": imageToSave.split("data:image/jpg;base64,")[1],
 			"description": descriptionToSave
 		};
-		ajaxRequest(config.MODELS_D + "/take-picture-model.php", "POST", datas, function(){
+		ajaxRequest(config.CONTROLLERS_D + "/take-picture-controller.php", "POST", datas, function(){
 			requestCallback(sharePictureCallback);
 		});
 	}
@@ -230,7 +231,7 @@ function changeFilter(type) {
 		filterDivToAdd.style.filter = video.style.filter;
 
 		let filterToAdd = document.createElement("img");
-		filterToAdd.src = "../filters/" + select.options[select.selectedIndex].value + ".png";
+		filterToAdd.src = config.FILTERS_D + "/" + select.options[select.selectedIndex].value + ".png";
 		filterToAdd.classList.add("img-fluid");
 		filterToAdd.setAttribute("data-path", select.options[select.selectedIndex].value);
 		filterToAdd.setAttribute("data-type", type);
@@ -257,7 +258,7 @@ function addFilters(type) {
 		"callType": "getFilters",
 		"type": type
 	};
-	ajaxRequest(config.MODELS_D + "/take-picture-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/take-picture-controller.php", "POST", datas, function(){
 		requestCallback(successAddFiltersCallback, null);
 	});
 

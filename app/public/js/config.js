@@ -1,11 +1,9 @@
 let config = {
-	ROOT_D: "/Camagru",
-	ABSPATH_D: "/Users/tbailly-/mamp/apache2/htdocs/camagru",
+	ROOT_D			: "/..",
+	CONTROLLERS_D	: "/controllers",
+	JS_D			: "/js",
+	CSS_D			: "/css",
+	IMG_D			: "/img",
+	PICTURES_D		: "/pictures",
+	FILTERS_D		: "/filters"
 }
-config.MODELS_D = config.ROOT_D + "/models";
-config.VIEWS_D = config.ROOT_D + "/views";
-
-config.PUBLIC_D = config.ROOT_D + "/public";
-config.IMG_D = config.PUBLIC_D + "/img";
-config.CSS_D = config.PUBLIC_D + "/css";
-config.JS_D = config.PUBLIC_D + "/js";

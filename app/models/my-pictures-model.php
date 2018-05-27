@@ -4,11 +4,11 @@ session_start();
 include_once '../config/config.php';
 include_once CLASSES_D . '/Database.class.php';
 include_once CLASSES_D . '/Image.class.php';
-Database::setDBConnection($DB_DSN, $DB_USER, $DB_PASSWORD);
 
 init();
 
 function init() {
+	Database::setDBConnection($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
 	if ($_POST && isset($_POST['callType']))
 	{
 		if ($_POST['callType'] == 'getPicturesOfUser' && isset($_POST['skip']) && isset($_POST['limit']))
@@ -25,7 +25,7 @@ function init() {
 		}
 	}
 	else
-		echo 'Error: No connected user';
+		echo 'Error: Missing datas';
 }
 
 function getPicturesOfUser($idUser, $skip, $limit) {

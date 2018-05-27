@@ -35,7 +35,7 @@ function requestCallback(successFunction, errorFunction) {
 		{
 			sendNotification("error", "Error during process, please try again in a few minutes");
 			if (errorFunction !== null)
-				errorFunction(message);
+				errorFunction();
 		}
 	}
 }

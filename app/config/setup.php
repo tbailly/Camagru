@@ -2,7 +2,7 @@
 
 include_once "./config.php";
 include_once CLASSES_D . '/Database.class.php';
-Database::setDBConnection('mysql:host=localhost;charset=utf8', $DB_USER, $DB_PASSWORD);
+Database::setDBConnection('mysql:host=' . $DB_HOST . ';charset=utf8', $DB_USER, $DB_PASSWORD);
 
 echo 'Trying to create camagru database, please wait...<br>';
 
@@ -12,9 +12,9 @@ $query = <<<SQL
 	START TRANSACTION;
 	SET time_zone = "+00:00";
 
-	DROP DATABASE IF EXISTS `camagru`;
-	CREATE DATABASE IF NOT EXISTS `camagru`;
-	USE `camagru`;
+	-- DROP DATABASE IF EXISTS `$DB_DATABASE`;
+	-- CREATE DATABASE IF NOT EXISTS `$DB_DATABASE`;
+	USE `$DB_DATABASE`;
 
 	CREATE TABLE `comment` (
 	  `id_comment` int(11) NOT NULL,
@@ -45,7 +45,7 @@ $query = <<<SQL
 	(12, 'object', 'sunglasses', 'Sunglasses'),
 	(13, 'classic', 'contrast(2)', 'High contrast'),
 	(14, 'classic', 'contrast(0.3)', 'Low contrast'),
-	(15, 'classic', 'grayscale()', 'Grayscale');
+	(15, 'classic', 'grayscale(1)', 'Grayscale');
 
 	CREATE TABLE `image` (
 	  `id_image` int(11) NOT NULL,
@@ -126,18 +126,18 @@ $query = <<<SQL
 	  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
 
 	ALTER TABLE `comment`
-	  ADD CONSTRAINT `Comment_fk0` FOREIGN KEY (`id_image`) REFERENCES `image` (`id_image`) ON DELETE CASCADE ON UPDATE CASCADE,
-	  ADD CONSTRAINT `Comment_fk1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+	  ADD CONSTRAINT `Comment_fk0` FOREIGN KEY (`id_image`) REFERENCES `image` (`id_image`) ON DELETE CASCADE,
+	  ADD CONSTRAINT `Comment_fk1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE;
 
 	ALTER TABLE `image`
-	  ADD CONSTRAINT `Image_fk0` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+	  ADD CONSTRAINT `Image_fk0` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE;
 
 	ALTER TABLE `like`
-	  ADD CONSTRAINT `Like_fk0` FOREIGN KEY (`id_image`) REFERENCES `image` (`id_image`) ON DELETE CASCADE ON UPDATE CASCADE,
-	  ADD CONSTRAINT `Like_fk1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+	  ADD CONSTRAINT `Like_fk0` FOREIGN KEY (`id_image`) REFERENCES `image` (`id_image`) ON DELETE CASCADE,
+	  ADD CONSTRAINT `Like_fk1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE;
 
 	ALTER TABLE `token`
-	  ADD CONSTRAINT `Token_fk0` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+	  ADD CONSTRAINT `Token_fk0` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE;
 
 	COMMIT;
 

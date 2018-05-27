@@ -1,22 +1,28 @@
 <?php
 
+session_start();
 include_once '../config/config.php';
 include_once CLASSES_D . "/Database.class.php";
 include_once CLASSES_D . "/Token.class.php";
 include_once CLASSES_D . "/User.class.php";
-Database::setDBConnection($DB_DSN, $DB_USER, $DB_PASSWORD);
+
+init();
 
 function init() {
-	if ($_GET && isset($_GET['token']) && $_GET['token'] != "")
-	{
-		try {
-			User::confirmAccount($_GET['token']);
-			Token::deleteToken($_GET['token']);
-		} catch (Exception $e) {
-			return ('Error: ' . $e->getMessage());
-		}
-		return ('Your account is now confirmed, you can now log in and enjoy Camagru !');
-	}
+	Database::setDBConnection($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
+	if ($_POST && isset($_POST['token']) && $_POST['token'] != "" && $_POST['token'] != "undefined")
+		confirmAccount();
 	else
-		return ('Error: Missing token');
+		echo 'Error: Missing token';
+}
+
+function confirmAccount() {
+	try {
+		User::confirmAccount($_POST['token']);
+		Token::deleteToken($_POST['token']);
+	} catch (Exception $e) {
+		echo 'Error: ' . $e->getMessage();
+		return;
+	}
+	echo 'Your account is now confirmed, you can now log in and enjoy Camagru !';
 }

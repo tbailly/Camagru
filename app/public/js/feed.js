@@ -10,7 +10,7 @@ function getPictures(skip, limit) {
 		"skip": skip,
 		"limit": limit
 	};
-	ajaxRequest(config.MODELS_D + "/feed-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/feed-controller.php", "POST", datas, function(){
 		requestCallback(successGetPictureCallback, null);
 	});
 
@@ -27,7 +27,7 @@ function getPictures(skip, limit) {
 			
 			let contentImg = document.createElement("img");
 			contentImg.classList.add("card-img-top");
-			contentImg.src = "../pictures/" + images[i].id_user + "/" + images[i].path + ".jpg";
+			contentImg.src = config.PICTURES_D + "/" + images[i].id_user + "/" + images[i].path + ".jpg";
 
 			let cardBody = document.createElement("div");
 			cardBody.classList.add("card-body");
@@ -64,7 +64,7 @@ function getCommentsAndLikes(imgDatas, imgSrc) {
 		"callType": "getCommentsAndLikes",
 		"idImage": imgDatas.id_image
 	};
-	ajaxRequest(config.MODELS_D + "/feed-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/feed-controller.php", "POST", datas, function(){
 		requestCallback(successGetCommentsAndLikesCallback, null);
 	});
 
@@ -100,7 +100,7 @@ function getCommentsAndLikes(imgDatas, imgSrc) {
 		let pictureDetailsUserImg = document.createElement("img");
 		pictureDetailsUserImg.classList.add("rounded-circle");
 		if (imgDatas.profile_img === '1')
-			pictureDetailsUserImg.src = "../pictures/profiles/" + imgDatas.id_user + ".jpg";
+			pictureDetailsUserImg.src = config.PICTURES_D + "/profiles/" + imgDatas.id_user + ".jpg";
 		else
 			pictureDetailsUserImg.src = "./img/user-placeholder.png";
 		pictureDetailsDiv.appendChild(pictureDetailsUserImg);
@@ -130,7 +130,7 @@ function getCommentsAndLikes(imgDatas, imgSrc) {
 			let commentUserImg = document.createElement("img");
 			commentUserImg.classList.add("rounded-circle");
 			if (comments[i].profile_img == 1)
-				commentUserImg.src = "../pictures/profiles/" + comments[i].id_user + ".jpg";
+				commentUserImg.src = config.PICTURES_D + "/profiles/" + comments[i].id_user + ".jpg";
 			else
 				commentUserImg.src = "./img/user-placeholder.png";
 			commentDiv.appendChild(commentUserImg);
@@ -215,7 +215,7 @@ function addComment(imgDatas, comment) {
 		"idImage": imgDatas.id_image,
 		"comment": comment
 	};
-	ajaxRequest(config.MODELS_D + "/feed-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/feed-controller.php", "POST", datas, function(){
 		requestCallback(successAddCommentCallback, null);
 	});
 
@@ -229,7 +229,7 @@ function addComment(imgDatas, comment) {
 		userImg.classList.add("rounded-circle");
 
 		if (user.profile_img)
-			userImg.src = "../pictures/profiles/" + user.id_user + ".jpg";
+			userImg.src = config.PICTURES_D + "/profiles/" + user.id_user + ".jpg";
 		else
 			userImg.src = "./img/user-placeholder.png";
 			
@@ -253,7 +253,7 @@ function toggleLike(imgDatas) {
 		"callType": "toggleLike",
 		"idImage": imgDatas.id_image
 	};
-	ajaxRequest(config.MODELS_D + "/feed-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/feed-controller.php", "POST", datas, function(){
 		requestCallback(successToggleLikeCallback, null);
 	});
 

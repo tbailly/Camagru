@@ -67,7 +67,7 @@ Class User {
 
 		$pwd = hash('whirlpool', $pwd);
 
-		$query = "INSERT INTO `User` (`username`, `mail`, `password`, `firstname`, `lastname`)
+		$query = "INSERT INTO `user` (`username`, `mail`, `password`, `firstname`, `lastname`)
 				VALUES (:username, :mail, :pwd, :firstName, :lastName)";
 
 		$params = array(
@@ -87,7 +87,7 @@ Class User {
 	}
 
 	public static function deleteAccount($username) {
-		$query = "DELETE FROM `User` WHERE `username` = :username";
+		$query = "DELETE FROM `user` WHERE `username` = :username";
 
 		$params = array(
 			':username' => $username
@@ -103,7 +103,7 @@ Class User {
 
 	public static function logIn($username, $pwd) {
 		$pwd = hash('whirlpool', $pwd);
-		$query = "SELECT * FROM `User` WHERE `username` = :username AND `password` = :pwd";
+		$query = "SELECT * FROM `user` WHERE `username` = :username AND `password` = :pwd";
 
 		$params = array(
 			':username'  => array( $username, PDO::PARAM_STR ),
@@ -133,10 +133,10 @@ Class User {
 	}
 
 	public static function confirmAccount($token) {
-		$query = "UPDATE `User`
-				INNER JOIN `Token` ON `User`.`id_user` = `Token`.`id_user`
-				SET `User`.`account_confirmed` = 1 
-				WHERE `Token`.`token` = :token";
+		$query = "UPDATE `user`
+				INNER JOIN `token` ON `user`.`id_user` = `token`.`id_user`
+				SET `user`.`account_confirmed` = 1 
+				WHERE `token`.`token` = :token";
 
 		$params = array(
 			':token'  => array( $token, PDO::PARAM_STR )
@@ -160,7 +160,7 @@ Class User {
 				$query .= ", ";
 			$count++;
 		}
-		$query .= " FROM `User`";
+		$query .= " FROM `user`";
 
 		try {
 			$query = Database::newQuery($query, null);
@@ -172,7 +172,7 @@ Class User {
 	}
 
 	public static function getUserByMail($mail) {
-		$query = "SELECT * FROM `User` WHERE `mail` = :mail";
+		$query = "SELECT * FROM `user` WHERE `mail` = :mail";
 
 		$params = array(
 			':mail'  => array( $mail, PDO::PARAM_STR )
@@ -203,7 +203,7 @@ Class User {
 		}
 		$params = array();
 
-		$query = "UPDATE `User` SET";
+		$query = "UPDATE `user` SET";
 		if ($detailsArray['mail'] !== null)
 		{
 			$query .= " `mail`=:mail,";
@@ -262,7 +262,7 @@ Class User {
 	public static function updatePasswordById($idUser, $password) {
 		try {
 			self::checkInputs(null, null, $password, null, null);
-			$query = "UPDATE `User`
+			$query = "UPDATE `user`
 					SET `password` = :password 
 					WHERE `id_user` = :idUser";
 

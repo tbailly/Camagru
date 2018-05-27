@@ -6,28 +6,30 @@ include_once CLASSES_D . '/Database.class.php';
 include_once CLASSES_D . '/Token.class.php';
 include_once CLASSES_D . '/User.class.php';
 include_once CLASSES_D . '/Mail.class.php';
-Database::setDBConnection($DB_DSN, $DB_USER, $DB_PASSWORD);
 
-if ($_POST && isset($_POST['callType']))
-	init();
+init();
 
 function init() {
-	if ($_POST['callType'] == 'sendMail' && isset($_POST['mail']) && $_POST['mail'] != "")
-		requestResetPassword();
-	else if ($_POST['callType'] == 'getToken' && isset($_POST['token']) && $_POST['token'] != "")
-		getToken($_POST['token']);
-	else if ($_POST['callType'] == 'resetPassword' && isset($_POST['password']) && $_POST['password'] != "" &&
-			isset($_POST['idUser']) && $_POST['idUser'] != "" && isset($_POST['token']) && $_POST['token'] != "")
-		resetPassword($_POST['idUser'], $_POST['password'], $_POST['token']);
-	else
-		echo "Error: Missing or empty field";
+	Database::setDBConnection($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
+	if ($_POST)
+	{
+		if ($_POST['callType'] == 'sendMail' && isset($_POST['mail']) && $_POST['mail'] != "")
+			requestResetPassword();
+		else if ($_POST['callType'] == 'getToken' && isset($_POST['token']) && $_POST['token'] != "")
+			getToken($_POST['token']);
+		else if ($_POST['callType'] == 'resetPassword' && isset($_POST['password']) && $_POST['password'] != "" &&
+				isset($_POST['idUser']) && $_POST['idUser'] != "" && isset($_POST['token']) && $_POST['token'] != "")
+			resetPassword($_POST['idUser'], $_POST['password'], $_POST['token']);
+		else
+			echo "Error: Missing or empty field";
+	}
 }
 
 function requestResetPassword() {
 	try {
 		$user = User::getUserByMail($_POST['mail']);
 		$token = Token::newToken($user['username'], 'reset-password');
-		$mail = new Mail;
+		$mail = new Mail();
 		$mail->setReceiver($user);
 		$mail->setResetPasswordMessage($token);
 		$mail->send();

@@ -40,7 +40,7 @@ function signup(e) {
 		"mail"		: document.getElementById("signup-mail").value,
 		"password"	: document.getElementById("signup-password").value,
 	};
-	ajaxRequest(config.MODELS_D + "/signup-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/signup-controller.php", "POST", datas, function(){
 		requestCallback(successSignupCallback, errorSignupCallback);
 	});
 
@@ -66,7 +66,7 @@ function login(e) {
 		"usernameOrMail": document.getElementById("login-username-mail").value,
 		"password"		: document.getElementById("login-password").value,
 	};
-	ajaxRequest(config.MODELS_D + "/login-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/login-controller.php", "POST", datas, function(){
 		requestCallback(successLoginCallback, errorLoginCallback);
 	});
 	
@@ -82,7 +82,7 @@ function login(e) {
 function logout(e) {
 	e.preventDefault();
 
-	ajaxRequest(config.MODELS_D + "/logout-model.php", "POST", null, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/logout-controller.php", "POST", null, function(){
 		requestCallback(successLogoutCallback, null);
 	});
 
@@ -96,7 +96,7 @@ function refreshHeader() {
 		"toRefresh": "header",
 	};
 
-	ajaxRequest(config.MODELS_D + "/refresher.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/refresher.php", "POST", datas, function(){
 		requestCallback(successRefreshHeaderCallback, null);
 	});
 

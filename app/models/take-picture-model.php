@@ -6,18 +6,20 @@ include_once CLASSES_D . '/Database.class.php';
 include_once CLASSES_D . '/Image.class.php';
 include_once CLASSES_D . '/User.class.php';
 include_once CLASSES_D . '/Filter.class.php';
-Database::setDBConnection($DB_DSN, $DB_USER, $DB_PASSWORD);
 
-if ($_POST && isset($_POST['callType']))
-	init();
+init();
 
 function init() {
-	if ($_POST['callType'] == 'pictureMontage')
-		pictureMontage();
-	else if ($_POST['callType'] == 'savePicture')
-		savePicture();
-	else if ($_POST['callType'] == 'getFilters')
-		getFilters();
+	Database::setDBConnection($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
+	if ($_POST)
+	{
+		if ($_POST['callType'] == 'pictureMontage')
+			pictureMontage();
+		else if ($_POST['callType'] == 'savePicture')
+			savePicture();
+		else if ($_POST['callType'] == 'getFilters')
+			getFilters();
+	}
 }
 
 function pictureMontage() {
@@ -25,14 +27,16 @@ function pictureMontage() {
 	{
 		$datas = json_decode($_POST['jsonDatas']);
 		$main = $datas->main;
-		$mainImage = imagecreatefromstring(base64_decode($main->b64datas)); // 1280 x 720 pic
+		if (!($mainImage = imagecreatefromstring(base64_decode($main->b64datas))))
+			exit("Error: Invalid datas, can't create image");
 
 		if ($datas->classicFilter)
 			applyClassicFilter($mainImage, $datas->classicFilter);
 
 		foreach ($datas->filters as $key => $filter)
 		{
-			$originalFilterImage = imagecreatefrompng("../filters/" . $filter->path . ".png");
+			if (!($originalFilterImage = imagecreatefrompng(FILTERS_D . "/" . $filter->path . ".png")))
+				exit("Error: Invalid datas, can't create image");
 			imagealphablending($originalFilterImage, false);
 			imagesavealpha($originalFilterImage, true);
 			$pngTransparency = imagecolorallocatealpha($originalFilterImage , 0, 0, 0, 127);
@@ -111,7 +115,6 @@ function savePicture() {
 			$imageName = Image::saveImage($id_user, htmlentities($_POST['description']));
 		} catch (Exception $e) {
 			echo $e->getMessage();
-			// echo "Error: Can't save your picture, please try again";
 			return;
 		}
 		if (!is_dir(PICTURES_D . '/' . $id_user))

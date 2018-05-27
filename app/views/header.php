@@ -17,7 +17,7 @@ $headerContent = <<<HTML
 HTML;
     if ($_SESSION['logged_on_user']['profile_img'] === '1') {
 $headerContent .= <<<HTML
-                <img class="rounded-circle" src="../pictures/profiles/{$_SESSION['logged_on_user']['id_user']}.jpg"/>
+                <img class="rounded-circle" src="./pictures/profiles/{$_SESSION['logged_on_user']['id_user']}.jpg"/>
             </button>
         </div>
     </nav>

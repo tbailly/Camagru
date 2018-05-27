@@ -4,7 +4,7 @@ Class Image {
 
 	public static function saveImage($idUser, $description) {
 		$imageName = uniqid();
-		$query = "INSERT INTO `Image` (`creation_date`, `id_user`, `path`, `description`)
+		$query = "INSERT INTO `image` (`creation_date`, `id_user`, `path`, `description`)
 				VALUES (NOW(), :idUser, :imageName, :description)";
 
 		$params = array(
@@ -22,8 +22,8 @@ Class Image {
 	}
 	
 	public static function getImages($start, $number) {
-		$query = "SELECT * FROM `Image`
-					INNER JOIN `User` ON `User`.`id_user` = `Image`.`id_user`
+		$query = "SELECT * FROM `image`
+					INNER JOIN `user` ON `user`.`id_user` = `image`.`id_user`
 					ORDER BY `creation_date` DESC
 					LIMIT :start, :number";
 
@@ -42,10 +42,10 @@ Class Image {
 	}
 
 	public static function getImagesOfUser($idUser, $start, $number) {
-		$query = "SELECT `Image`.* FROM `Image`
-					INNER JOIN `User` ON `User`.`id_user` = `Image`.`id_user`
-					WHERE `User`.`id_user` = :id_user
-					ORDER BY `Image`.`creation_date` DESC LIMIT :start, :number";
+		$query = "SELECT `image`.* FROM `image`
+					INNER JOIN `user` ON `user`.`id_user` = `image`.`id_user`
+					WHERE `user`.`id_user` = :id_user
+					ORDER BY `image`.`creation_date` DESC LIMIT :start, :number";
 
 		$params = array(
 			':id_user' 	=> array( (int)$idUser, PDO::PARAM_INT ),
@@ -63,8 +63,8 @@ Class Image {
 	}
 
 	public static function getImage($idImage) {
-		$query = "SELECT * FROM `Image`
-					INNER JOIN `User` ON `User`.`id_user` = `Image`.`id_user`
+		$query = "SELECT * FROM `image`
+					INNER JOIN `user` ON `user`.`id_user` = `image`.`id_user`
 					WHERE `id_image` = :idImage";
 
 		$params = array(
@@ -81,7 +81,7 @@ Class Image {
 	}
 
 	public static function deleteImage($idImage) {
-		$query = "DELETE FROM `Image` WHERE `id_image`=:idImage";
+		$query = "DELETE FROM `image` WHERE `id_image`=:idImage";
 
 		$params = array(
 			':idImage' => array( (int)$idImage, PDO::PARAM_INT )
@@ -95,7 +95,7 @@ Class Image {
 	}
 
 	public static function enableProfilePicture($idUser) {
-		$query = "UPDATE `User` SET `profile_img`=1 WHERE `id_user`=:idUser";
+		$query = "UPDATE `user` SET `profile_img`=1 WHERE `id_user`=:idUser";
 
 		$params = array(
 			':idUser' => array( (int)$idUser, PDO::PARAM_INT )

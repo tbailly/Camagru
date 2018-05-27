@@ -4,11 +4,11 @@ session_start();
 include_once '../config/config.php';
 include_once CLASSES_D . '/Database.class.php';
 include_once CLASSES_D . '/User.class.php';
-Database::setDBConnection($DB_DSN, $DB_USER, $DB_PASSWORD);
 
 init();
 
 function init() {
+	Database::setDBConnection($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
 	if (isset($_POST['usernameOrMail']) && $_POST['usernameOrMail'] != "" &&
 		isset($_POST['password']) && $_POST['password'] != "")
 	{

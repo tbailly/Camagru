@@ -21,7 +21,7 @@ function updateUser(e) {
 		datas.password = password;
 	else
 		datas.password = '';
-	ajaxRequest(config.MODELS_D + "/profile-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/profile-controller.php", "POST", datas, function(){
 		requestCallback(successGetPictureCallback, null);
 	});
 

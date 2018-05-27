@@ -8,10 +8,10 @@ Class Like {
 			"currentUserLike" => FALSE
 		);
 
-		$addLikeQuery = "INSERT INTO `Like` (`id_image`, `id_user`)
+		$addLikeQuery = "INSERT INTO `like` (`id_image`, `id_user`)
 				VALUES (:idImage, :idUser)";
 
-		$deleteLikeQuery = "DELETE FROM `Like`
+		$deleteLikeQuery = "DELETE FROM `like`
 				WHERE `id_image` = :idImage AND `id_user` = :idUser";
 
 		$params = array(
@@ -36,7 +36,7 @@ Class Like {
 	}
 
 	public static function getLikesNb($idImage) {
-		$query = "SELECT * FROM `Like`
+		$query = "SELECT * FROM `like`
 				WHERE `id_image` = :idImage";
 
 		$params = array(
@@ -53,10 +53,10 @@ Class Like {
 	}
 
 	public static function getLikeByImageByUser($idImage, $idUser) {
-		$checkLikeQuery = "SELECT * FROM `Like`
-					INNER JOIN `Image` ON `Like`.`id_image` = `Image`.`id_image`
-					INNER JOIN `User` ON `Like`.`id_user` = `User`.`id_user`
-				WHERE `Like`.`id_image` = :idImage AND `Like`.`id_user` = :idUser";
+		$checkLikeQuery = "SELECT * FROM `like`
+					INNER JOIN `image` ON `like`.`id_image` = `image`.`id_image`
+					INNER JOIN `user` ON `like`.`id_user` = `user`.`id_user`
+				WHERE `like`.`id_image` = :idImage AND `like`.`id_user` = :idUser";
 
 		$params = array(
 			':idImage' => array( (int)$idImage, PDO::PARAM_INT ),
@@ -79,7 +79,7 @@ Class Like {
 	public static function getLikesByImage($idImage, $idUser) {
 		$likes = Array();
 
-		$query = "SELECT * FROM `Like`
+		$query = "SELECT * FROM `like`
 					INNER JOIN `image` ON `like`.`id_image` = `image`.`id_image`
 				WHERE `like`.`id_image` = :idImage";
 

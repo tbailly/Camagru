@@ -4,9 +4,9 @@ Class Filter {
 
 	public static function getFilters($type) {
 		if ($type == 'all')
-			$query = "SELECT * FROM `Filter`";
+			$query = "SELECT * FROM `filter`";
 		else
-			$query = "SELECT * FROM `Filter` WHERE type = ':type'";
+			$query = "SELECT * FROM `filter` WHERE type = ':type'";
 
 		$params = array(
 			':type' 	=> array( $type, PDO::PARAM_STR )

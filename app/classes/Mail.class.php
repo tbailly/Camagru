@@ -102,7 +102,7 @@ Class Mail {
 		$message = sprintf(
 			$message,
 			$this->_receiver['firstname'],
-			'http://localhost:8080/camagru/public/confirm-account.php',
+			'https://' . $_SERVER['HTTP_HOST'] . '/confirm-account.php',
 			$token
 		);
 
@@ -171,7 +171,7 @@ Class Mail {
 			$this->_receiver['firstname'],
 			$this->_sender['firstname'],
 			$this->_sender['lastname'],
-			'http://localhost:8080/camagru/public'
+			'https://' . $_SERVER['HTTP_HOST']
 		);
 
 		$this->_message = $message;
@@ -237,7 +237,7 @@ Class Mail {
 		$message = sprintf(
 			$message,
 			$this->_receiver['firstname'],
-			'http://localhost:8080/camagru/public/reset-password.php',
+			'https://' . $_SERVER['HTTP_HOST'] . '/reset-password.php',
 			$token
 		);
 
@@ -277,11 +277,11 @@ Class Mail {
 
     /* Others setters */
 	private function setHeaders() {
-		$this->_headers = 	'From: tbailly-@student.42.fr' . "\r\n" .
-							/*'Reply-To: tbailly-@student.42.fr' . "\r\n" .*/
-							/*'Return-Path: tbailly-@student.42.fr' . "\r\n" .*/
+		$this->_headers = 	'From: noreply@thomasbs.fr' . "\r\n" .
+							/*'Reply-To: noreply@thomasbs.fr' . "\r\n" .*/
+							/*'Return-Path: noreply@thomasbs.fr' . "\r\n" .*/
 							'X-Mailer: PHP/' . phpversion() . "\r\n" .
-							'X-Sender: tbailly- < tbailly-@student.42.fr >' . "\r\n" .
+							'X-Sender: Camagru < noreply@thomasbs.fr >' . "\r\n" .
 							'MIME-Version: 1.0' . "\r\n" . 
 							'Content-type: text/html; charset=utf-8' . "\r\n" .
 							'Content-Transfer-Encoding: 8bit' . "\r\n" .

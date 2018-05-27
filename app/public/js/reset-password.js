@@ -17,11 +17,13 @@ function sendMail(e) {
 		"callType": "sendMail",
 		"mail": mail
 	}
-	ajaxRequest(config.MODELS_D + "/reset-password-model.php", "POST", datas, function(){
+	console.log(datas);
+	ajaxRequest(config.CONTROLLERS_D + "/reset-password-controller.php", "POST", datas, function(){
 		requestCallback(successResetPasswordCallback, null);
 	});
 
 	function successResetPasswordCallback(message) {
+		console.log(message);
 		sendNotification("success", message);
 	}
 }
@@ -31,7 +33,7 @@ function getToken(token) {
 		"callType": "getToken",
 		"token": token
 	}
-	ajaxRequest(config.MODELS_D + "/reset-password-model.php", "POST", datas, function(){
+	ajaxRequest(config.CONTROLLERS_D + "/reset-password-controller.php", "POST", datas, function(){
 		requestCallback(successGetTokenCallback, errorGetTokenCallback);
 	});
 
@@ -62,7 +64,7 @@ function resetPassword(e, token) {
 			"idUser": token.id_user,
 			"token": token.token
 		}
-		ajaxRequest(config.MODELS_D + "/reset-password-model.php", "POST", datas, function(){
+		ajaxRequest(config.CONTROLLERS_D + "/reset-password-controller.php", "POST", datas, function(){
 			requestCallback(successGetTokenCallback, null);
 		});
 	}

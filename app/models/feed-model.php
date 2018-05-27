@@ -7,11 +7,11 @@ include_once CLASSES_D . '/Image.class.php';
 include_once CLASSES_D . '/Comment.class.php';
 include_once CLASSES_D . '/Like.class.php';
 include_once CLASSES_D . '/Mail.class.php';
-Database::setDBConnection($DB_DSN, $DB_USER, $DB_PASSWORD);
 
 init();
 
 function init() {
+	Database::setDBConnection($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
 	if ($_POST && isset($_POST['callType']))
 	{
 		if ($_POST['callType'] == 'getPictures' && isset($_POST['skip']) && isset($_POST['limit']))
@@ -37,7 +37,7 @@ function init() {
 		}
 	}
 	else
-		echo 'Error: No connected user';
+		echo 'Error: Missing datas';
 }
 
 
@@ -79,7 +79,6 @@ function addComment($comment, $idImage, $idUser) {
 	);
 	try {
 		$comment = Comment::addComment($comment, $idImage, $idUser);
-		// $poster = Image::getPosterOfImageById($idImage);
 		$poster = Image::getImage($idImage);
 		if ($_SESSION['logged_on_user']['id_user'] != $poster['id_user'] && $poster['mail_preference'] === '1')
 		{

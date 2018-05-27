@@ -1,4 +1,5 @@
 <?php
+
 $pageTitle = 'feed';
 
 include_once '../config/config.php';
@@ -16,7 +17,6 @@ include_once VIEWS_D . '/template.php';
 			<h1>Feed</h1>
 		</div>
 	</div>
-
 	<div id="feed" class="row no-gutters">
 		<!-- All pictures added with feed.js -->
 	</div>

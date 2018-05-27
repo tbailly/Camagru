@@ -3,7 +3,7 @@
 Class Comment {
 
 	public static function addComment($comment, $idImage, $idUser) {
-		$query = "INSERT INTO `Comment` (`text`, `id_image`, `id_user`)
+		$query = "INSERT INTO `comment` (`text`, `id_image`, `id_user`)
 				VALUES (:comment, :idImage, :idUser)";
 
 		$comment = htmlspecialchars($comment);

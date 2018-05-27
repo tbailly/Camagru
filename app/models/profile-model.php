@@ -6,11 +6,11 @@ include_once CLASSES_D . '/Database.class.php';
 include_once CLASSES_D . '/User.class.php';
 include_once CLASSES_D . '/Token.class.php';
 include_once CLASSES_D . '/Mail.class.php';
-Database::setDBConnection($DB_DSN, $DB_USER, $DB_PASSWORD);
 
 init();
 
 function init() {
+	Database::setDBConnection($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
 	if ($_POST && isset($_POST['mail']) && isset($_POST['username']) && isset($_POST['firstname']) &&
 		isset($_POST['lastname']) && isset($_POST['password']) && isset($_POST['mailPreference']))
 	{
