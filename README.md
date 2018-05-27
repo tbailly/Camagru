@@ -1,7 +1,7 @@
 # Camagru
 ## Presentation
 Website to take, edit and share pictures in PHP and JS Vanilla.
-You can test it live here : [Test my Camagru](https://thomasbs.fr/camagru)
+You can test it live here : [Test my Camagru](https://camagru.thomasbs.fr)
 
 ### Main features
 * User register/login
